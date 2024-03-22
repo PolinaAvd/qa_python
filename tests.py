@@ -86,7 +86,6 @@ class TestBooksCollector:
         favorite_book.add_book_in_favorites(book_dict["name"])
         assert favorite_book.favorites == [book_dict["name"]]
 
-
     def test_delete_book_from_favorites_deleted_book(self, book_dict):
         del_favorite_book = BooksCollector()
         del_favorite_book.add_new_book(book_dict["name"])
@@ -94,7 +93,6 @@ class TestBooksCollector:
         del_favorite_book.add_book_in_favorites(book_dict["name"])
         del_favorite_book.delete_book_from_favorites(book_dict["name"])
         assert len(del_favorite_book.favorites) == 0
-
 
     def test_get_book_from_favorites_get_book(self, book_dict):
         list_favorite_book = BooksCollector()
