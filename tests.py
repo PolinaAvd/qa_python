@@ -1,14 +1,13 @@
+#Нужно исправить: здесь и далее: при наличии методов работы с атрибутом у тестируемой программы, необходимо использовать их,
+#нам важно знать что не только атрибут изменился но и метод работы с ним работает, так и тестов будет меньше и атомарность не пострадает
+
+# был такой комментарий в прошлой проверке
+
+# books_genre (и другие атриботы в assert - результат вывода метода add_new_book(). Простой вызов метода add_new_book() выводит None. Я понимаю, что проверка избыточна, и метод add_new_book() проверяется дальше. Но задание сделать провреку для всех методов.
 import pytest
 from main import BooksCollector
 
 class TestBooksCollector:
-
-    def test_add_new_book_add_two_books(self):
-
-        collector = BooksCollector()
-        collector.add_new_book('Гордость и предубеждение и зомби')
-        collector.add_new_book('Что делать, если ваш кот хочет вас убить')
-        assert len(collector.books_genre) == 2
 
     def test_add_new_book_add_too_long_name_not_added(self):
         collect = BooksCollector()
@@ -57,20 +56,11 @@ class TestBooksCollector:
         book_with_spgenre.set_book_genre(book_dict["name"], book_dict["genre"])
         assert book_with_spgenre.get_books_with_specific_genre(book_dict["genre"]) == [book_dict["name"]]
 
-    def test_get_books_genre_add_one_book(self, book_dict):
-
-        add_book = BooksCollector()
-        add_book.add_new_book(book_dict["name"])
-        add_book.set_book_genre(book_dict["name"], book_dict["genre"])
-        assert add_book.get_books_genre() == {book_dict["name"]: book_dict["genre"]}
-
     def test_get_books_genre_add_two_books(self):
 
         add_books = BooksCollector()
         add_books.add_new_book('Гордость и предубеждение и зомби')
-        add_books.set_book_genre('Гордость и предубеждение и зомби', 'Комедии')
         add_books.add_new_book('Что делать, если ваш кот хочет вас убить')
-        add_books.set_book_genre('Что делать, если ваш кот хочет вас убить', 'Ужасы')
         assert len(add_books.get_books_genre()) == 2
 
     @pytest.mark.parametrize(
@@ -113,5 +103,11 @@ class TestBooksCollector:
         list_favorite_book.add_new_book(book_dict["name"])
         list_favorite_book.set_book_genre(book_dict["name"], book_dict["genre"])
         list_favorite_book.add_book_in_favorites(book_dict["name"])
-        list_favorite_book.get_list_of_favorites_books()
         assert list_favorite_book.favorites == [book_dict["name"]]
+
+    def test_get_list_of_favorites_books_add_book_in_favorite_book_added(self, book_dict):
+        list_favorite_book = BooksCollector()
+        list_favorite_book.add_new_book(book_dict["name"])
+        list_favorite_book.set_book_genre(book_dict["name"], book_dict["genre"])
+        list_favorite_book.add_book_in_favorites(book_dict["name"])
+        assert list_favorite_book.get_list_of_favorites_books() == [book_dict["name"]]
