@@ -6,7 +6,6 @@
 # books_genre (и другие атриботы в assert - результат вывода метода add_new_book(). Простой вызов метода add_new_book() выводит None. Я понимаю, что проверка избыточна, и метод add_new_book() проверяется дальше. Но задание сделать провреку для всех методов.
 import pytest
 from main import BooksCollector
-
 class TestBooksCollector:
 
     def test_add_new_book_add_too_long_name_not_added(self):
@@ -57,7 +56,6 @@ class TestBooksCollector:
         assert book_with_spgenre.get_books_with_specific_genre(book_dict["genre"]) == [book_dict["name"]]
 
     def test_get_books_genre_add_two_books(self):
-
         add_books = BooksCollector()
         add_books.add_new_book('Гордость и предубеждение и зомби')
         add_books.add_new_book('Что делать, если ваш кот хочет вас убить')
