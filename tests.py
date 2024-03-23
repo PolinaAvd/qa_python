@@ -11,13 +11,13 @@ class TestBooksCollector:
     def test_add_new_book_add_too_long_name_not_added(self):
         collect = BooksCollector()
         collect.add_new_book('Гордость и предубеждение и зомби  всякая чепухахахаххахаххахахаххахахахаххахахаххахахахахххахахаххахахахахах')
-        assert len(collect.books_genre) == 0
+        assert len(collect.get_books_genre()) == 0
 
     def test_set_book_genre_added_book_with_genre(self, book_dict):
         book_with_genre = BooksCollector()
         book_with_genre.add_new_book(book_dict["name"])
         book_with_genre.set_book_genre(book_dict["name"], book_dict["genre"])
-        assert book_with_genre.books_genre == {book_dict["name"]: book_dict["genre"]}
+        assert book_with_genre.get_books_genre() == {book_dict["name"]: book_dict["genre"]}
 
     @pytest.mark.parametrize(
         'name, genre',
@@ -29,7 +29,7 @@ class TestBooksCollector:
         book_no_genre = BooksCollector()
         book_no_genre.add_new_book(name)
         book_no_genre.set_book_genre(name, genre)
-        assert book_no_genre.books_genre == {name: ''}
+        assert book_no_genre.get_books_genre() == {name: ''}
 
     def test_get_book_genre_added_book_with_genre(self, book_dict):
         book_withgenre = BooksCollector()
@@ -84,7 +84,7 @@ class TestBooksCollector:
         favorite_book.add_new_book(book_dict["name"])
         favorite_book.set_book_genre(book_dict["name"], book_dict["genre"])
         favorite_book.add_book_in_favorites(book_dict["name"])
-        assert favorite_book.favorites == [book_dict["name"]]
+        assert favorite_book.get_list_of_favorites_books() == [book_dict["name"]]
 
     def test_delete_book_from_favorites_deleted_book(self, book_dict):
         del_favorite_book = BooksCollector()
@@ -92,14 +92,14 @@ class TestBooksCollector:
         del_favorite_book.set_book_genre(book_dict["name"], book_dict["genre"])
         del_favorite_book.add_book_in_favorites(book_dict["name"])
         del_favorite_book.delete_book_from_favorites(book_dict["name"])
-        assert len(del_favorite_book.favorites) == 0
+        assert len(del_favorite_book.get_list_of_favorites_books()) == 0
 
     def test_get_book_from_favorites_get_book(self, book_dict):
         list_favorite_book = BooksCollector()
         list_favorite_book.add_new_book(book_dict["name"])
         list_favorite_book.set_book_genre(book_dict["name"], book_dict["genre"])
         list_favorite_book.add_book_in_favorites(book_dict["name"])
-        assert list_favorite_book.favorites == [book_dict["name"]]
+        assert list_favorite_book.get_list_of_favorites_books() == [book_dict["name"]]
 
     def test_get_list_of_favorites_books_add_book_in_favorite_book_added(self, book_dict):
         list_favorite_book = BooksCollector()

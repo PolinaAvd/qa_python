@@ -1,6 +1,5 @@
 # qa_python
 
-
 1. test_add_new_book_add_too_long_name_not_added - negativ test for add_new_book()
 2. test_set_book_genre_added_book_with_genre - positiv test for set_book_genre()
 3. test_set_book_genre_added_book_no_genre - negativ test for set_book_genre()
