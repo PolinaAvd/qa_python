@@ -94,9 +94,3 @@ class TestBooksCollector:
         list_favorite_book.add_book_in_favorites(book_dict["name"])
         assert list_favorite_book.get_list_of_favorites_books() == [book_dict["name"]]
 
-    def test_get_list_of_favorites_books_add_book_in_favorite_book_added(self, book_dict):
-        list_favorite_book = BooksCollector()
-        list_favorite_book.add_new_book(book_dict["name"])
-        list_favorite_book.set_book_genre(book_dict["name"], book_dict["genre"])
-        list_favorite_book.add_book_in_favorites(book_dict["name"])
-        assert list_favorite_book.get_list_of_favorites_books() == [book_dict["name"]]
