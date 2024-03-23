@@ -30,7 +30,6 @@ class TestBooksCollector:
         book_no_genre.add_new_book(name)
         book_no_genre.set_book_genre(name, genre)
         assert book_no_genre.get_books_genre() == {name: ''}
-
     def test_get_book_genre_added_book_with_genre(self, book_dict):
         book_withgenre = BooksCollector()
         book_withgenre.add_new_book(book_dict["name"])
